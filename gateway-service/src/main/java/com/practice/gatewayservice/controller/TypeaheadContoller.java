@@ -9,6 +9,7 @@ import java.util.List;
 
 
 @Slf4j
+@CrossOrigin("*")
 @RestController
 public class TypeaheadContoller {
     @Autowired private TypeaheadClient typeaheadClient;
@@ -23,6 +24,8 @@ public class TypeaheadContoller {
     @GetMapping("/trie/phrase/{prefix}")
     public ResponseEntity<List<String>> topPhrases(@PathVariable String prefix) {
         log.info("retrieving top phrases for prefix {}", prefix);
-        return ResponseEntity.ok(typeaheadClient.topPhrases(prefix));
+        var phrases = typeaheadClient.topPhrases(prefix);
+        log.info("returned {} phrases for prefix {}", phrases.size(), prefix);
+        return ResponseEntity.ok(phrases);
     }
 }
