@@ -1,6 +1,7 @@
 package com.practice.typeaheadservice.contoller;
 
 import com.practice.typeaheadservice.domain.Phrase;
+import com.practice.typeaheadservice.domain.TrieNode;
 import com.practice.typeaheadservice.service.TrieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TypeaheadController {
 
     @GetMapping("/trie/phrase/{prefix}")
     public ResponseEntity<List<String>> topPhrases(@PathVariable String prefix) {
-        log.info("retrieving top phrases for prefix {}", prefix);
+        log.info("Retrieving top phrases for prefix {}", prefix);
         var phrases =
                 trieService
                         .autocomplete(prefix).stream()
